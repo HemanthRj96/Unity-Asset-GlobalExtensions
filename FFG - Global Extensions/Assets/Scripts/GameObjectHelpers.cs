@@ -71,7 +71,7 @@ public static class GameObjectHelpers
     }
 
     /// <summary>
-    /// Clones this gameobject, careful when you clone self since it can lead to infinite cloning
+    /// Clones this gameobject, do not use this method inside lifecycle methods of the cloning object as it leads to infinite cloning and memory overflow
     /// </summary>
     public static GameObject CloneThis(this GameObject gameObject)
     {

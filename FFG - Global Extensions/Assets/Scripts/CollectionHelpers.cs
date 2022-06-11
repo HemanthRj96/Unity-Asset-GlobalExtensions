@@ -24,6 +24,15 @@ public static class CollectionHelpers
     }
 
     /// <summary>
+    /// Prints all the values inside the dictionary
+    /// </summary>
+    public static void PrintValues<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
+    {
+        foreach (var temp in dictionary)
+            Debug.Log($"Key : {temp.Key}, Value : {temp.Value}");
+    }
+
+    /// <summary>
     /// Adds an item if it doesn't exist
     /// </summary>
     public static void TryAdd<TType>(this List<TType> list, TType item)
@@ -33,29 +42,12 @@ public static class CollectionHelpers
     }
 
     /// <summary>
-    /// Shuffles elements in a list
+    /// Adds key and value if it doesn't exist
     /// </summary>
-    public static void Shuffle<TType>(this List<TType> list)
+    public static void TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
     {
-        System.Random random = new System.Random();
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = random.Next(n + 1);
-            TType value = list[k];
-            list[k] = list[n];
-            list[n] = value;
-        }
-    }
-
-    /// <summary>
-    /// Prints all the values inside the dictionary
-    /// </summary>
-    public static void PrintValues<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
-    {
-        foreach (var temp in dictionary)
-            Debug.Log($"Key : {temp.Key}, Value : {temp.Value}");
+        if (!dictionary.ContainsKey(key))
+            dictionary.Add(key, value);
     }
 
     /// <summary>
@@ -84,12 +76,20 @@ public static class CollectionHelpers
     }
 
     /// <summary>
-    /// Adds key and value if it doesn't exist
+    /// Shuffles elements in a list
     /// </summary>
-    public static void TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
+    public static void Shuffle<TType>(this List<TType> list)
     {
-        if (!dictionary.ContainsKey(key))
-            dictionary.Add(key, value);
+        System.Random random = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            TType value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
     }
 
     /// <summary>
